@@ -1,0 +1,5 @@
+port: 1050
+https:
+  key : ./dexfreight.io/privkey.pem
+  cert: ./dexfreight.io/cert.pem
+  ca  : ./dexfreight.io/chain.pem
