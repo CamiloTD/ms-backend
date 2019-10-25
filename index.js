@@ -1,18 +1,18 @@
 const { Subject } = require('rxjs');
 const { tap } = require('rxjs/operators');
 
-const accelerometer = new Subject();
+const Sensors = {};
+
+['Accelerometer', 'Gyroscope', 'Magnetometer'].forEach(s => Sensors[s] = new Subject());
 
 module.exports = ({
     
-    Mobile: {
-        Accelerometer ({ x, y, z }) {
-            accelerometer.next({ x, y, z });
-        }
+    emit (sensor, data) {
+        Sensors[sensor] && Sensors[sensor].next(data)
     },
 
-    Accelerometer () {
-        return accelerometer.pipe(tap(() => 0));
+    listen (sensor) {
+        return Sensors[sensor];
     }
 
 });

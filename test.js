@@ -1,7 +1,11 @@
-const { Socket } = require('unete-io');
+const { map, pairwise } = require('rxjs/operators');
+const { default: netlib } = require('/Users/camilotorres/Projects/xnet/build');
 
-const API = Socket('https://localhost:1050');
+const API  = netlib('ios://dev-api.dexfreight.io:1050');
+const plot = netlib('fs:///Users/camilotorres/Projects/magic-show/backend/plot.py')("X", "Y", "Z");
 
-API.Accelerometer().then(accelerometer => {
-    accelerometer.subscribe(console.log);
-}).catch(console.log);
+(async () => {
+    const acceleration = await API.Accelerometer();
+    
+    acceleration.subscribe(({ x, y, z }) =>  plot.input.next(`${x} ${y} ${z}`));
+})();

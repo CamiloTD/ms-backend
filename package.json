@@ -4,6 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
+    "numjs": "^0.16.0",
     "rxjs": "^6.5.3",
     "unete-cli": "^1.7.0",
     "unete-io": "^1.3.1"
